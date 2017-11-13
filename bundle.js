@@ -65,64 +65,74 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bar__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue__);
 
 
+var _bar = __webpack_require__(1);
 
-var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
+var _bar2 = _interopRequireDefault(_bar);
+
+var _vue = __webpack_require__(2);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var app = new _vue2.default({
     el: '#app',
     data: {
         newTodo: '',
         todoList: []
     },
-    created: function () {
+    created: function created() {
+        var _this = this;
+
         // onbeforeunload文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Window/onbeforeunload
-        window.onbeforeunload = () => {
-            let dataString = JSON.stringify(this.todoList) // JSON 文档: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON
-            window.localStorage.setItem('myTodos', dataString) // 看文档https://developer.mozilla.org/zh-CN/docs/Web/API/Window/localStorage
-            let newTodo = JSON.stringify(this.newTodo)
-            window.localStorage.setItem('newTodo', newTodo)
-        }
+        window.onbeforeunload = function () {
+            var dataString = JSON.stringify(_this.todoList); // JSON 文档: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON
+            window.localStorage.setItem('myTodos', dataString); // 看文档https://developer.mozilla.org/zh-CN/docs/Web/API/Window/localStorage
+            var newTodo = JSON.stringify(_this.newTodo);
+            window.localStorage.setItem('newTodo', newTodo);
+        };
 
-        let oldDataString = window.localStorage.getItem('myTodos')
-        let oldData = JSON.parse(oldDataString)
-        let oldTodo = JSON.parse(window.localStorage.getItem('newTodo'))
-        this.todoList = oldData || []
-        this.newTodo = oldTodo || ''
-
+        var oldDataString = window.localStorage.getItem('myTodos');
+        var oldData = JSON.parse(oldDataString);
+        var oldTodo = JSON.parse(window.localStorage.getItem('newTodo'));
+        this.todoList = oldData || [];
+        this.newTodo = oldTodo || '';
     },
     methods: {
-        addTodo: function () {
+        addTodo: function addTodo() {
             this.todoList.push({
                 title: this.newTodo,
-                createdAt: (new Date()).toLocaleDateString(),
+                createdAt: new Date().toLocaleDateString(),
                 done: false // 添加一个 done 属性
-            })
-            this.newTodo = ''
+            });
+            this.newTodo = '';
         },
-        removeTodo: function (todo) {
-            let index = this.todoList.indexOf(todo) // Array.prototype.indexOf 是 ES 5 新加的 API
-            this.todoList.splice(index, 1) // 不懂 splice？赶紧看 MDN 文档！
+        removeTodo: function removeTodo(todo) {
+            var index = this.todoList.indexOf(todo); // Array.prototype.indexOf 是 ES 5 新加的 API
+            this.todoList.splice(index, 1); // splice 查看mdn
         }
     }
-})   
+});
 
 /***/ }),
 /* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* unused harmony export default */
 
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = bar;
 function bar() {
-  //
-  console.log('hi')
+  // test code
+  console.log('hi');
 }
 
 /***/ }),
