@@ -89,6 +89,7 @@ var app = new _vue2.default({
     created: function created() {
         var _this = this;
 
+        //  生命周期钩子函数，可以用来表示在实例创建之后执行
         // onbeforeunload文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Window/onbeforeunload
         window.onbeforeunload = function () {
             var dataString = JSON.stringify(_this.todoList); // JSON 文档: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON
@@ -96,7 +97,6 @@ var app = new _vue2.default({
             var newTodo = JSON.stringify(_this.newTodo);
             window.localStorage.setItem('newTodo', newTodo);
         };
-
         var oldDataString = window.localStorage.getItem('myTodos');
         var oldData = JSON.parse(oldDataString);
         var oldTodo = JSON.parse(window.localStorage.getItem('newTodo'));

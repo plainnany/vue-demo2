@@ -7,7 +7,7 @@ var app = new Vue({
         newTodo: '',
         todoList: []
     },
-    created: function () {
+    created: function () {  //  生命周期钩子函数，可以用来表示在实例创建之后执行
         // onbeforeunload文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Window/onbeforeunload
         window.onbeforeunload = () => {
             let dataString = JSON.stringify(this.todoList) // JSON 文档: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON
@@ -15,13 +15,12 @@ var app = new Vue({
             let newTodo = JSON.stringify(this.newTodo)
             window.localStorage.setItem('newTodo', newTodo)
         }
-
         let oldDataString = window.localStorage.getItem('myTodos')
         let oldData = JSON.parse(oldDataString)
         let oldTodo = JSON.parse(window.localStorage.getItem('newTodo'))
         this.todoList = oldData || []
         this.newTodo = oldTodo || ''
-
+    
     },
     methods: {
         addTodo: function () {
@@ -37,4 +36,4 @@ var app = new Vue({
             this.todoList.splice(index, 1) // splice 查看mdn
         }
     }
-})   
+}) 
