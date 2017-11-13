@@ -86,18 +86,22 @@ var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
         window.onbeforeunload = () => {
             let dataString = JSON.stringify(this.todoList) // JSON 文档: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON
             window.localStorage.setItem('myTodos', dataString) // 看文档https://developer.mozilla.org/zh-CN/docs/Web/API/Window/localStorage
+            let newTodo = JSON.stringify(this.newTodo)
+            window.localStorage.setItem('newTodo', newTodo)
         }
 
         let oldDataString = window.localStorage.getItem('myTodos')
         let oldData = JSON.parse(oldDataString)
+        let oldTodo = JSON.parse(window.localStorage.getItem('newTodo'))
         this.todoList = oldData || []
+        this.newTodo = oldTodo || ''
 
     },
     methods: {
         addTodo: function () {
             this.todoList.push({
                 title: this.newTodo,
-                createdAt: new Date(),
+                createdAt: (new Date()).toLocaleDateString(),
                 done: false // 添加一个 done 属性
             })
             this.newTodo = ''
