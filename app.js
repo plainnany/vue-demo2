@@ -5,7 +5,8 @@ var app = new Vue({
     el: '#app',
     data: {
         newTodo: '',
-        todoList: []
+        todoList: [],
+        actionType: 'signUp'
     },
     created: function () {  //  生命周期钩子函数，可以用来表示在实例创建之后执行
         // onbeforeunload文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Window/onbeforeunload

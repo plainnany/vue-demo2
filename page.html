@@ -11,9 +11,52 @@
 
 <body>
     <div id="app">
-        <div class="newTask">
+        <section id="signInAndSignUp">
+            <div>
+                <label><input type="radio" v-model="actionType" name="sign" value="signIn">登录</label>
+                <label><input type="radio" v-model="actionType" name="sign" value="signUp">注册</label>
+            </div>
+            <div class="signIn" v-if="actionType==='signIn'">
+                <form>
+                    <div class="formRow">
+                        用户名：
+                        <input type="text" placeholder="请输入用户名">
+                    </div>
+                    <div class="formRow">
+                        密码：　
+                        <input type="text" placeholder="请输入密码">
+                    </div>
+                    <div class="formAction">
+                        <input type="submit" value="登录">
+                    </div>
+                    <div class="formRow">
+                        <a href="">注册</a>
+                    </div>
+                </form>
+            </div>
+            <div class="signUp" v-if="actionType==='signUp'">
+                <form>
+                    <div class="formRow">
+                        用户名：
+                        <input type="text" placeholder="请输入用户名">
+                    </div>
+                    <div class="formRow">
+                        邮箱：　
+                        <input type="text" placeholder="请输入邮箱">
+                    </div>
+                    <div class="formRow">
+                        密码：　
+                        <input type="text" placeholder="请输入密码">
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section id="todo">
+
+        </section>
+        <!-- <div class="newTask">
             <input type="text" v-model="newTodo" @keypress.enter="addTodo">
-        </div>
+        </div> 
         <ol class="todos">
             <li v-for="todo in todoList">
                 <span>
@@ -29,6 +72,7 @@
                 <button @click="removeTodo(todo)">×</button>
             </li>
         </ol>
+        -->
     </div>
     <script src="bundle.js"></script>
 </body>

@@ -84,7 +84,8 @@ var app = new _vue2.default({
     el: '#app',
     data: {
         newTodo: '',
-        todoList: []
+        todoList: [],
+        actionType: 'signUp'
     },
     created: function created() {
         var _this = this;
