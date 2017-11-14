@@ -11,20 +11,22 @@
 
 <body>
     <div id="app">
-        <section id="signInAndSignUp">
+        <section id="signInAndSignUp" v-if="!currentUser">
             <div>
-                <label><input type="radio" v-model="actionType" name="sign" value="signIn">登录</label>
-                <label><input type="radio" v-model="actionType" name="sign" value="signUp">注册</label>
+                <label>
+                    <input type="radio" v-model="actionType" name="sign" value="signIn">登录</label>
+                <label>
+                    <input type="radio" v-model="actionType" name="sign" value="signUp">注册</label>
             </div>
             <div class="signIn" v-if="actionType==='signIn'">
-                <form>
+                <form @submit.prevent="login">
                     <div class="formRow">
                         用户名：
-                        <input type="text" placeholder="请输入用户名">
+                        <input type="text" placeholder="请输入用户名" v-model="formData.username">
                     </div>
                     <div class="formRow">
-                        密码：　
-                        <input type="text" placeholder="请输入密码">
+                        密码：
+                        <input type="password" placeholder="请输入密码" v-model="formData.password">
                     </div>
                     <div class="formAction">
                         <input type="submit" value="登录">
@@ -35,45 +37,46 @@
                 </form>
             </div>
             <div class="signUp" v-if="actionType==='signUp'">
-                <form>
+                <form @submit.prevent="signUp">
                     <div class="formRow">
                         用户名：
-                        <input type="text" placeholder="请输入用户名">
+                        <input type="text" placeholder="请输入用户名" v-model="formData.username">
                     </div>
                     <div class="formRow">
-                        邮箱：　
-                        <input type="text" placeholder="请输入邮箱">
+                        邮箱：
+                        <input type="text" placeholder="请输入邮箱" v-model="formData.email">
                     </div>
                     <div class="formRow">
-                        密码：　
-                        <input type="text" placeholder="请输入密码">
+                        密码：
+                        <input type="password" placeholder="请输入密码" v-model="formData.password">
+                    </div>
+                    <div>
+                        <input type="submit" value="注册">
                     </div>
                 </form>
             </div>
         </section>
-        <section id="todo">
-
+        <section id="todo" v-if="currentUser">
+            <div class="newTask">
+                <input type="text" v-model="newTodo" @keypress.enter="addTodo">
+            </div>
+            <ol class="todos">
+                <li v-for="todo in todoList">
+                    <span>
+                        <input type="checkbox" v-model="todo.done"> {{ todo.title }}
+                    </span>
+                    <span>
+                        <span class="created">创建于</span>
+                        {{todo.createdAt}}
+                        <span class="todoStatus" v-if="todo.done">已完成</span>
+                        <span class="todoStatus" v-else>未完成</span>
+                    </span>
+                    <button @click="removeTodo(todo)">×</button>
+                </li>
+            </ol>
         </section>
-        <!-- <div class="newTask">
-            <input type="text" v-model="newTodo" @keypress.enter="addTodo">
-        </div> 
-        <ol class="todos">
-            <li v-for="todo in todoList">
-                <span>
-                    <input type="checkbox" v-model="todo.done">
-                    {{ todo.title }} 
-                </span>
-                <span>
-                    <span class="created">创建于</span>
-                    {{todo.createdAt}}
-                    <span class="todoStatus" v-if="todo.done">已完成</span>
-                    <span class="todoStatus" v-else>未完成</span>
-                </span>
-                <button @click="removeTodo(todo)">×</button>
-            </li>
-        </ol>
-        -->
     </div>
     <script src="bundle.js"></script>
 </body>
+
 </html>

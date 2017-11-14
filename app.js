@@ -1,12 +1,28 @@
 import bar from './bar'
 import Vue from 'vue'
+import AV from 'leancloud-storage'
+
+var APP_ID = 'DXqCwjoTK6asDkLaGHgKO2kB-gzGzoHsz';
+var APP_KEY = 'MG9LHVrktMkOAoeJUA4C8fPx';
+
+AV.init({
+    appId: APP_ID,
+    appKey: APP_KEY
+});
 
 var app = new Vue({
     el: '#app',
     data: {
         newTodo: '',
         todoList: [],
-        actionType: 'signUp'
+        actionType: 'signUp',
+        formData: {
+            username: '',
+            password: '',
+            email: ''
+        },
+        currentUser: null
+
     },
     created: function () {  //  生命周期钩子函数，可以用来表示在实例创建之后执行
         // onbeforeunload文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Window/onbeforeunload
@@ -21,7 +37,6 @@ var app = new Vue({
         let oldTodo = JSON.parse(window.localStorage.getItem('newTodo'))
         this.todoList = oldData || []
         this.newTodo = oldTodo || ''
-    
     },
     methods: {
         addTodo: function () {
@@ -35,6 +50,33 @@ var app = new Vue({
         removeTodo: function (todo) {
             let index = this.todoList.indexOf(todo) // Array.prototype.indexOf 是 ES 5 新加的 API
             this.todoList.splice(index, 1) // splice 查看mdn
+        },
+        login: function () {
+            AV.User.logIn(this.formData.username, this.formData.password).then( (loginedUser) => {
+                console.log('登录成功');
+                this.currentUser = this.getCurrentUser()
+              }, function (error) {
+              });
+        },
+        signUp: function () {
+            let user = new AV.User()
+            // 设置用户名
+
+            user.setUsername(this.formData.username)
+            // 设置密码
+            user.setPassword(this.formData.password)
+            // 设置邮箱 邮箱接口貌似有问题
+            // user.setEmail(this.formData.email)
+            user.signUp().then( (loginedUser) => {
+                this.currentUser = this.getCurrentUser()
+                console.log('注册成功')
+            }, function (error) {
+                console.log('error')
+            })
+        },
+        getCurrentUser: function(){
+            let {id, createdAt, attributes: {username}} = AV.User.current()
+            return {id, username, createdAt}
         }
     }
 }) 
