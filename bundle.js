@@ -359,6 +359,12 @@ var app = new _vue2.default({
                 username = _AV$User$current.attributes.username;
 
             return { id: id, username: username, createdAt: createdAt };
+        },
+        logout: function logout() {
+            _leancloudStorage2.default.User.logOut();
+            // 现在的 currentUser 是 null 了
+            this.currentUser = _leancloudStorage2.default.User.current();
+            window.location.reload();
         }
     }
 });
