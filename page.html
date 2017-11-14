@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>vue resume editor</title>
-    <style>
-    
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
@@ -18,15 +16,20 @@
         </div>
         <ol class="todos">
             <li v-for="todo in todoList">
-                <input type="checkbox" v-model="todo.done">
-                {{ todo.title }} 创建于 {{todo.createdAt}}
-                <span v-if="todo.done">已完成</span>
-                <span v-else>未完成</span>
-                <button @click="removeTodo(todo)">delete</button>
+                <span>
+                    <input type="checkbox" v-model="todo.done">
+                    {{ todo.title }} 
+                </span>
+                <span>
+                    <span class="created">创建于</span>
+                    {{todo.createdAt}}
+                    <span class="todoStatus" v-if="todo.done">已完成</span>
+                    <span class="todoStatus" v-else>未完成</span>
+                </span>
+                <button @click="removeTodo(todo)">×</button>
             </li>
         </ol>
     </div>
     <script src="bundle.js"></script>
 </body>
-
 </html>

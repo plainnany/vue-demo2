@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+*::after,*::before{
+    box-sizing: border-box;
+}
+ul,ol{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+#app{
+    width: 600px;
+    margin: 50px auto;
+    text-align: center;
+}
+#app .newTask{
+    
+}
+#app .newTask input{
+    width: 100%;
+    border: 1px solid cornflowerblue;
+    line-height: 30px;
+    font-size: 18px;
+    border-radius: 2px;
+    outline: none;
+    
+}
+#app .todos{
+    width: 100%;
+
+}
+#app .todos li{
+    line-height: 32px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+}
+#app .todos li > span:nth-child(1){
+    display: inline-block;
+    width: 30%;
+}
+#app .todoStatus{
+
+}
+#app button{
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 20px;
+}
