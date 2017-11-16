@@ -80,7 +80,7 @@ var app = new Vue({
         },
         logout: function(){
             AV.User.logOut();
-            // 现在的 currentUser 是 null 了
+            // 现在的 currentUser 是 null 了 
             this.currentUser = AV.User.current()
             window.location.reload()
         }
